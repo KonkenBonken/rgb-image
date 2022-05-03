@@ -8,21 +8,37 @@ import java.io.File;
 import javax.imageio.ImageIO;
 import java.io.IOException;
 import java.lang.Math;
+import java.util.Arrays;
 
 class rgb {
   public static void main(String[] args) throws IOException {
-    int w = 50;
-    int h = 50;
+    int w = 500;
+    int h = 500;
     int[] matrix = new int[w * h]; // hex number in #AARRGGBB format
 
     int clr = Integer.parseInt(args[0], 16);
-    int a = 255 * 0x1000000;
-    
+    int A = 0xFF000000;
+    int R = 0xFF0000;
+    int G = 0x00FF00;
+    int B = 0x0000FF;
+
+    double r = (clr >> 16) & 0xff;
+    double g = (clr >> 8) & 0xff;
+    double b = clr & 0xff;
+    double tot = r+g+b;
+    r = r / tot;
+    g = g / tot + r;
+
     for (int i = 0; i < matrix.length; i++) {
-      int r = ((clr >> 16) & 0xff) * 0x10000;
-      int g = ((clr >> 8) & 0xff) * 0x100;
-      int b = (clr & 0xff) * 0x1;
-      matrix[i] = a + r + g + b;
+      double rand = Math.random();
+      if (rand < r)
+        clr = R;
+      else if (rand < g)
+        clr  = G;
+      else
+        clr = B;
+
+      matrix[i] = clr + A;
     }
 
     DataBufferInt buffer = new DataBufferInt(matrix, matrix.length);
