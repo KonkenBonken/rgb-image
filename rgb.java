@@ -34,12 +34,8 @@ class rgb {
     }; // ARGB (yes, ARGB, as the masks are R, G, B, A always) order
     WritableRaster raster = Raster.createPackedRaster(buffer, w, h, w, bandMasks, null);
 
-    System.out.println("raster: " + raster);
-
     ColorModel cm = ColorModel.getRGBdefault();
     BufferedImage image = new BufferedImage(cm, raster, cm.isAlphaPremultiplied(), null);
-
-    System.err.println("image: " + image);
 
     File f = new File("image.png");
     if (!ImageIO.write(image, "PNG", f)) {
