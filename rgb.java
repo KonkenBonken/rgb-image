@@ -15,9 +15,10 @@ class rgb {
     int h = 50;
     int[] matrix = new int[w * h]; // hex number in #AARRGGBB format
 
+    int clr = Integer.parseInt(args[0], 16);
+    int a = 255 * 0x1000000;
+    
     for (int i = 0; i < matrix.length; i++) {
-      int clr = Integer.parseInt(args[0], 16);
-      int a = 255 * 0x1000000;
       int r = ((clr >> 16) & 0xff) * 0x10000;
       int g = ((clr >> 8) & 0xff) * 0x100;
       int b = (clr & 0xff) * 0x1;
