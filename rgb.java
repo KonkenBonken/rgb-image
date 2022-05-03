@@ -13,7 +13,7 @@ class rgb {
   public static void main(String[] args) throws IOException {
     int w = 50;
     int h = 50;
-    int[] matrix = new int[w * h];
+    int[] matrix = new int[w * h]; // hex number in #AARRGGBB format
 
     for (int i = 0; i < matrix.length; i++) {
       int clr = Integer.parseInt(args[0], 16);
@@ -31,7 +31,7 @@ class rgb {
       0xFF00,
       0xFF,
       0xFF000000
-    }; // ARGB (yes, ARGB, as the masks are R, G, B, A always) order
+    };
     WritableRaster raster = Raster.createPackedRaster(buffer, w, h, w, bandMasks, null);
 
     ColorModel cm = ColorModel.getRGBdefault();
